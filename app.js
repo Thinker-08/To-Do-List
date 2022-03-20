@@ -7,11 +7,12 @@ const app = express();
 const mongoose = require("mongoose");
 const _ = require("lodash");
 app.set('view engine', 'ejs');
-
+require("dotenv").config();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://mihir:mihir@cluster0.nkmim.mongodb.net/todolistDB");
+const database = process.env.database;
+mongoose.connect(database);
 
 const itemsSchema = {
   name:String
@@ -115,6 +116,6 @@ app.get("/about", function(req, res){
   res.render("about");
 });
 
-app.listen(3000, function() {
+app.listen(3000 || process.env.PORT, function() {
   console.log("Server started on port 3000");
 });
