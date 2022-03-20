@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 const database = process.env.database;
-mongoose.connect(""+database);
+mongoose.connect(database);
 
 const itemsSchema = {
   name:String
